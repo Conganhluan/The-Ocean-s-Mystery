@@ -9,12 +9,18 @@
 
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
-SDL_Surface* mainSurface = NULL;
+SDL_Surface* anhNen = NULL;
+SDL_Surface* tempAnhNen = NULL;
 SDL_Texture* texture = NULL;
-Mix_Music* music = NULL;
+Mix_Music* nhacNen = NULL;
 
 namespace game {
-    int init();
+    bool init();
+    void desteroy();
+    bool xoaNen(SDL_Surface* a);
+    bool ganAnh(SDL_Surface* a, int x, int y);
+    SDL_Surface* loadAnh(std::string a);
+    bool taoAnhNen();
 }
 
 #endif
