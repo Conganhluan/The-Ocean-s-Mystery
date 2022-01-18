@@ -1,0 +1,37 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "SDL2",
+            "command": "C:/Program Files/mingw-w64/x86_64-8.1.0-win32-seh-rt_v6-rev0/mingw64/bin/g++.exe",
+            "args": [
+                "-g",
+                "build\\src\\main.cpp",
+                "build\\src\\mainThings.cpp",
+                "build\\src\\Events.cpp",
+                "-o",
+                "build\\main.exe",
+                "-ID:/Personal_files/C++/VSCODE/lib/SDL/SDL2-2.0.20/include",
+                "-LD:/Personal_files/C++/VSCODE/lib/SDL/SDL2-2.0.20/lib/x64",
+                "-Wall",
+                "-lmingw32",
+                "-lSDL2main",
+                "-lSDL2",
+                "-lSDL2_image",
+                "-lSDL2_mixer",
+                "-mwindows"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+    ],
+    "version": "2.0.0"
+}
