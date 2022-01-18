@@ -1,15 +1,12 @@
 #include"mainThings.h"
 #undef main
 
-//Khai bao bien moi truong
+//Cac bien moi truong
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface* anhNen = NULL;
-SDL_Surface* tempAnhNen = NULL;
 SDL_Texture* texture = NULL;
 Mix_Music* nhacNen = NULL;
-TTF_Font* font = NULL;
-SDL_Color mauchu = {0, 0, 0};
 SDL_Event event;
 
 //Cac bien phu
@@ -20,39 +17,43 @@ short Favor = 50;
 short Oxygen = 100;
 short Trans = 0;
 short Influ = 20;
-bool Death1 = false;
-bool Death2 = false;
-bool Death3 = false;
-bool Death4 = false;
-bool Death5 = false;
-bool Winning1 = false;
-bool Winning2 = false;
-bool Winning3 = false;
+short ketThuc = 0;
+short khungNen = 1;
+short turn = 0;
+short nenHientai = 0;
 
 int main(int arc, char* argv[] ){
-	//Khoi tao moi thu
+	
+    //Khoi tao moi thu
 	if (SDL_Init(SDL_INIT_EVERYTHING)!=0) return -1;
     window = SDL_CreateWindow("Thoát khỏi vua Thủy Tề",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,1024,576,SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window,-1,0);
     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
-    //TTF_Init();
     Mix_Init(0);
-    //font = TTF_OpenFont("Vtimesb.ttf", 24);
-    //std::string noidung = "Lêu Lêu";
-    //SDL_Surface* chu = TTF_RenderText_Solid(font,noidung.c_str(),mauchu);
-    //game::ganAnh(chu,100,100);
-    texture = IMG_LoadTexture(renderer,"hinhnen.jpg");
-    if (texture==NULL) SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0);
-    SDL_RenderClear(renderer);
+    
+
+
     //Tro choi
     while (isRunning) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type==SDL_KEYDOWN || event.key.keysym.sym==SDLK_ESCAPE) 
-                isRunning=false;
+        if (khungNen!=nenHientai) game::showNen(khungNen);
+        switch (khungNen) {
+            case 1: {
+                while (SDL_PollEvent(&event)!=0) {
+                    if (event.type==SDL_KEYDOWN) switch (event.key.keysym.sym) {
+                        case SDLK_ESCAPE: isRunning = false;
+                    }
+                    else if (event.type==SDL_QUIT) isRunning = false;
+                }
+                break;
+            }
+            default: isRunning = false;
         }
-        SDL_RenderCopy(renderer,texture,NULL,NULL);
-        SDL_RenderPresent(renderer);
+        
+        
+        nenHientai = khungNen;
     }
+
+
 
 	//Huy moi thu
 	SDL_DestroyWindow(window);
