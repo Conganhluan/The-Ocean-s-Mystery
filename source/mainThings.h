@@ -7,20 +7,32 @@
 #include <SDL_ttf.h>
 #include <string>
 
-SDL_Window* window = NULL;
-SDL_Renderer* renderer = NULL;
-SDL_Surface* anhNen = NULL;
-SDL_Surface* tempAnhNen = NULL;
-SDL_Texture* texture = NULL;
-Mix_Music* nhacNen = NULL;
+extern SDL_Window* window;
+extern SDL_Renderer* renderer;
+extern SDL_Surface* anhNen;
+extern SDL_Surface* tempAnhNen;
+extern SDL_Texture* texture;
+extern Mix_Music* nhacNen;
+extern SDL_Event event;
+extern TTF_Font* font;
+extern SDL_Color mauchu;
+
+extern short Money;
+extern short Favor;
+extern short Oxygen;
+extern short Influ;
+extern short Trans;
+extern bool Death;
+extern bool Winning1;
+extern bool Winning2;
 
 namespace game {
-    bool init();
-    void desteroy();
     bool xoaNen(SDL_Surface* a);
     bool ganAnh(SDL_Surface* a, int x, int y);
     SDL_Surface* loadAnh(std::string a);
-    bool taoAnhNen();
+    void taoAnhNen();
+    void thaydoithuoctinh(char a, short b);
+    void bienDoi();
 }
 
 #endif
