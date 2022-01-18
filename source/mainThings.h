@@ -10,7 +10,6 @@
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Surface* anhNen;
-extern SDL_Surface* tempAnhNen;
 extern SDL_Texture* texture;
 extern Mix_Music* nhacNen;
 extern SDL_Event event;
@@ -22,15 +21,19 @@ extern short Favor;
 extern short Oxygen;
 extern short Influ;
 extern short Trans;
-extern bool Death;
+extern bool Death1;
+extern bool Death2;
+extern bool Death3;
+extern bool Death4;
+extern bool Death5;
 extern bool Winning1;
 extern bool Winning2;
+extern bool Winning3;
 
 namespace game {
     bool xoaNen(SDL_Surface* a);
     bool ganAnh(SDL_Surface* a, int x, int y);
     SDL_Surface* loadAnh(std::string a);
-    void taoAnhNen();
     void thaydoithuoctinh(char a, short b);
     void bienDoi();
 }
