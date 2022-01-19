@@ -1,5 +1,5 @@
 #ifndef mainThings
-#define  mainThings
+#define mainThings
 
 #include <SDL.h>
 #include <SDL_mixer.h>
@@ -7,6 +7,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 
 extern SDL_Window* window;
@@ -27,13 +28,26 @@ extern bool isRunning;
 extern short khungNen;
 extern short turn;
 extern bool stt[30];
-
+extern short nenHientai;
+extern bool collection[4];
+extern bool Save;
+extern short reNhanh;
 
 namespace game {
     void thaydoithuoctinh(char a, short b);
     void bienDoi();
     void showNen(int a);
-    int layRandom();
+    short layRandom();
+    void napAttributes();
+    void xoaAttributes();
+    void showAttributes();
+    void nhapfileCache();
+    void xuatfileCache();
+    void inCredit();
+    void inKetthuc(short a);
+    void inCollection();
+    void inSukien(short a, short b);
+    void inLoigioithieu();
 }
 
 #endif

@@ -15,10 +15,11 @@ class Sukien {
         SDL_Rect posNhanvat;
         short sttSukien;
     public:
-        Sukien(int a, std::string c);
+        Sukien(int a);
         ~Sukien();
         friend void show(Sukien a);
         friend void explain(Sukien a, bool b);
+        void thaydoi(short a);
 };
 
 
