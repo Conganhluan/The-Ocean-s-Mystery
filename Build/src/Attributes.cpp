@@ -17,7 +17,7 @@ void game::showAttributes(){
 
     texture = SDL_CreateTextureFromSurface(renderer,att2);
     temp = {0,64-Influ,64,Influ};
-    temp2 = {164,104-Influ,64,Influ};
+    temp2 = {164,105-Influ,64,Influ};
     SDL_RenderCopy(renderer,texture,&temp,&temp2);
 
     texture = SDL_CreateTextureFromSurface(renderer,att3);

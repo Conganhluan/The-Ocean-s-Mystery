@@ -46,11 +46,11 @@ int main(int arc, char* argv[] ){
 	if (SDL_Init(SDL_INIT_EVERYTHING)!=0) return -1;
     window = SDL_CreateWindow("The Ocean's Mystery",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,1024,576,SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window,-1,0);
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
+    SDL_SetRenderDrawColor(renderer, 138, 188, 222, 0);
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
     nhacNen = Mix_LoadMUS("nhacNen.mp3");
     Mix_VolumeMusic(30);
-    //Mix_PlayMusic(nhacNen,-1);
+    Mix_PlayMusic(nhacNen,-1);
     game::napAttributes();
     memset(stt,false,30);
     memset(collection,false,4);
@@ -66,18 +66,27 @@ int main(int arc, char* argv[] ){
                     Save=true;
                     game::inLoigioithieu();
                     SDL_Delay(10000);
+                    SDL_RenderClear(renderer);
                     game::showNen(khungNen);
                 }
                 game::showAttributes();
-                if (turn==0 || turn==4) {
+                if (turn==0 && turn==4) {
                     game::inSukien(0,turn);
-                    while (SDL_PollEvent(&event)!=0) {
-                        if (event.type==SDL_KEYDOWN && event.key.keysym.sym==SDLK_SPACE) {
-                            if (turn==4) (Favor>=45 && Influ>=45 && Oxygen>=25 && Money>=25 && Trans>=25)?reNhanh=2:reNhanh=1;
-                            khungNen=2;
-                            turn++;
+                    bool stop = false;
+                    while (!stop) {  
+                        while (SDL_PollEvent(&event)!=0) {
+                            if (event.type==SDL_KEYDOWN && event.key.keysym.sym==SDLK_SPACE) {
+                                if (turn==4) (Favor>=45 && Influ>=45 && Oxygen>=25 && Money>=25 && Trans>=25)?reNhanh=2:reNhanh=1;
+                                if (reNhanh!=0) khungNen=2;
+                                turn++;
+                            }
+                            else if (event.type==SDL_QUIT) isRunning = false;
+                            if (event.type==SDL_MOUSEBUTTONDOWN) {
+                                if (event.button.x>836 && event.button.x<986 && event.button.y>36 && event.button.y<68) khungNen = 6;
+                                else if (event.button.x>836 && event.button.x<986 && event.button.y>78 && event.button.y<110) khungNen = 3;
+                            }
                         }
-                        else if (event.type==SDL_QUIT) isRunning = false;
+                        if (turn!=0 || turn!=4 || khungNen!=1) stop = true;
                     }
                 }
                 else {
@@ -86,12 +95,12 @@ int main(int arc, char* argv[] ){
                     stt[random]=true;
                     Sukien sukien(random);
                     show(sukien);
-                    bool stop = false;
-                    while (!stop) {
+                    bool stopHere = false;
+                    while (!stopHere) {
                         while (SDL_PollEvent(&event)) {
+                            short luachon = 0;
                             switch (event.type) {
                                 case SDL_MOUSEBUTTONDOWN: {
-                                    short luachon = 0;
                                     if (event.button.x>92 && event.button.x<326 && event.button.y>418 && event.button.y<542) luachon=100;
                                     else if (event.button.x>398 && event.button.x<632 && event.button.y>418 && event.button.y<542) luachon=200;
                                     else if (event.button.x>836 && event.button.x<986 && event.button.y>36 && event.button.y<68) khungNen = 6;
@@ -103,14 +112,14 @@ int main(int arc, char* argv[] ){
                                         turn++;
                                         if (ketThuc!=0) game::inKetthuc(ketThuc);
                                     }
-                                    if (luachon!=0 || khungNen!=1) stop = true;
                                     break;
                                 }
-                                case SDL_QUIT:
-                                    isRunning = false; 
-                                    stop = true;
+                                case SDL_QUIT:{
+                                    isRunning = false;
                                     break; 
+                                }   
                             }
+                            if (luachon!=0 || khungNen!=1 || !isRunning) stopHere = true;
                         }
                     }
                 }
@@ -120,6 +129,9 @@ int main(int arc, char* argv[] ){
                 game::showAttributes();
                 if (turn==5 || turn==9 || turn==13) {
                     game::inSukien(reNhanh,turn);
+                    if (turn==5) collection[0]=1;
+                    else if (turn==9) collection[1]=1;
+                    else if (turn==13) collection[2]=collection[3]=1;
                     while (SDL_PollEvent(&event)!=0) {
                         if (event.type==SDL_KEYDOWN && event.key.keysym.sym==SDLK_SPACE) turn++;
                         else if (event.type==SDL_QUIT) isRunning = false;
@@ -203,7 +215,7 @@ int main(int arc, char* argv[] ){
                 while (SDL_PollEvent(&event)!=0) {
                     switch (event.type) {
                         case SDL_MOUSEBUTTONDOWN:
-
+                            if (event.button.x>40 && event.button.x<190 && event.button.y>51 && event.button.y<83) khungNen = 3;
                             break;
                         case SDL_QUIT:
                             isRunning=false;
@@ -244,10 +256,11 @@ int main(int arc, char* argv[] ){
                                 memset(stt,false,30);
                                 turn = 0;
                                 khungNen = 1;
-                                Money=Favor=50;
-                                Oxygen=100;
-                                Influ=20;
-                                Trans=0;
+                                Money = 32;
+                                Favor = 32;
+                                Oxygen = 64;
+                                Trans = 0;
+                                Influ = 15;
                             }   
                             else if (event.button.x>443 && event.button.x<583 && event.button.y>370 && event.button.y<450) {
                                 khungNen = 4;

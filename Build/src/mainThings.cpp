@@ -66,8 +66,7 @@ void game::xuatfileCache(){
 
 void game::inCredit(){
     texture = IMG_LoadTexture(renderer,"credit.png");
-    SDL_Rect temp = {};
-    SDL_RenderCopy(renderer,texture,NULL,&temp);
+    SDL_RenderCopy(renderer,texture,NULL,NULL);
     SDL_RenderPresent(renderer);
 }
 
@@ -108,11 +107,13 @@ void game::inSukien(short a, short b){
     std::string c = "sukien"+std::to_string(a) +std::to_string(b)+".png";
     texture = IMG_LoadTexture(renderer,c.c_str());
     SDL_Rect pos = {35,129,654,264};
+    SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer,texture,NULL,&pos);
     SDL_RenderPresent(renderer);
 }
 
 void game::inLoigioithieu(){
+    SDL_RenderClear(renderer);
     texture = IMG_LoadTexture(renderer,"loigioithieu.png");
     SDL_RenderCopy(renderer,texture,NULL,NULL);
     SDL_RenderPresent(renderer);

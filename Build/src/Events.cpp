@@ -58,7 +58,7 @@ void explain(Sukien a, bool b) {
 
 void Sukien::thaydoi(short a) {
     std::string b = std::to_string(this->sttSukien)+".txt";
-    std::ifstream input(b);
+    std::ifstream input(b.c_str());
     short temp1; char temp2;
     do {input>>temp1;} while (temp1!=a);
     do {
