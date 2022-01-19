@@ -45,7 +45,7 @@ void game::showNen(int a) {
 
 short game::layRandom(){
     srand(time(NULL));
-    return (short)rand()%30;
+    return (short)rand()%20;
 }
 
 void game::nhapfileCache(){
@@ -76,10 +76,8 @@ void game::inKetthuc(short a) {
     texture = IMG_LoadTexture(renderer,temp.c_str());
     SDL_RenderCopy(renderer,texture,NULL,NULL);
     SDL_RenderPresent(renderer);
-    SDL_Delay(5000);
-    texture = IMG_LoadTexture(renderer,"ketthuc.png");
-    SDL_RenderCopy(renderer,texture,NULL,NULL);
-    SDL_RenderPresent(renderer);
+    SDL_Delay(10000);
+    khungNen=5;
 }
 
 void game::inCollection() {
@@ -112,24 +110,6 @@ void game::inSukien(short a, short b){
     SDL_Rect pos = {35,129,654,264};
     SDL_RenderCopy(renderer,texture,NULL,&pos);
     SDL_RenderPresent(renderer);
-    bool stop = false;
-    while (!stop) {
-        while (SDL_PollEvent(&event)!=0) {
-            if (event.type==SDL_KEYDOWN && event.key.keysym.sym==SDLK_BACKSPACE) {
-                stop = true;
-                turn++;
-            }
-            else if (event.type==SDL_QUIT) {
-                stop = true;
-                isRunning = false;
-            }
-        }
-    }
-    if (a==0 && b==2) {
-        reNhanh = 1;
-        if (Favor>=45 && Influ>=45 && Oxygen>=25 && Money>=25 && Trans>=25) reNhanh = 2;
-        khungNen = 2;
-    }
 }
 
 void game::inLoigioithieu(){

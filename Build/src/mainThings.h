@@ -32,6 +32,7 @@ extern short nenHientai;
 extern bool collection[4];
 extern bool Save;
 extern short reNhanh;
+extern short chuoi[20];
 
 namespace game {
     void thaydoithuoctinh(char a, short b);

@@ -14,11 +14,11 @@ SDL_Event event;
 //Các biến phụ
 int Timehientai = 0;
 bool isRunning = true;
-short Money = 20;
-short Favor = 50;
-short Oxygen = 100;
+short Money = 32;
+short Favor = 32;
+short Oxygen = 64;
 short Trans = 0;
-short Influ = 20;
+short Influ = 15;
 short ketThuc = 0;
 short khungNen = 3;
 short turn = 0;
@@ -36,6 +36,7 @@ SDL_Rect rect2 = {188,42,64,64};
 SDL_Rect rect3 = {330,42,64,64};
 SDL_Rect rect4 = {472,42,64,64};
 SDL_Rect rect5 = {614,42,64,64};
+short chuoi[20] = {1,2,3,2,1,1,2,2,3,2,3,2,1,1,1,1,1,1,1,3};
 short reNhanh=0;
 
 
@@ -68,8 +69,17 @@ int main(int arc, char* argv[] ){
                     game::showNen(khungNen);
                 }
                 game::showAttributes();
-                if (turn==0) game::inSukien(0,1);
-                else if (turn==4) game::inSukien(0,2);
+                if (turn==0 || turn==4) {
+                    game::inSukien(0,turn);
+                    while (SDL_PollEvent(&event)!=0) {
+                        if (event.type==SDL_KEYDOWN && event.key.keysym.sym==SDLK_SPACE) {
+                            if (turn==4) (Favor>=45 && Influ>=45 && Oxygen>=25 && Money>=25 && Trans>=25)?reNhanh=2:reNhanh=1;
+                            khungNen=2;
+                            turn++;
+                        }
+                        else if (event.type==SDL_QUIT) isRunning = false;
+                    }
+                }
                 else {
                     int random;
                     do {random=game::layRandom();} while (stt[random]);
@@ -91,7 +101,7 @@ int main(int arc, char* argv[] ){
                                         if (luachon==100) explain(sukien,false); else explain(sukien,true);
                                         SDL_Delay(5000);
                                         turn++;
-                                        if (ketThuc!=0) khungNen = 5;
+                                        if (ketThuc!=0) game::inKetthuc(ketThuc);
                                     }
                                     if (luachon!=0 || khungNen!=1) stop = true;
                                     break;
@@ -108,9 +118,19 @@ int main(int arc, char* argv[] ){
             
             case 2: {
                 game::showAttributes();
-                if (turn==5) game::inSukien(reNhanh,1);
-                else if (turn==9) game::inSukien(reNhanh,2);
-                else if (turn==13) game::inSukien(reNhanh,3);
+                if (turn==5 || turn==9 || turn==13) {
+                    game::inSukien(reNhanh,turn);
+                    while (SDL_PollEvent(&event)!=0) {
+                        if (event.type==SDL_KEYDOWN && event.key.keysym.sym==SDLK_SPACE) turn++;
+                        else if (event.type==SDL_QUIT) isRunning = false;
+                    }
+                    turn++;
+                    if (turn==14) {
+                        if (reNhanh==1) ketThuc=9;
+                        else ketThuc=10;
+                        game::inKetthuc(ketThuc);
+                    }
+                }
                 else {
                     int random;
                     do {random=game::layRandom();} while (stt[random]);
@@ -130,7 +150,7 @@ int main(int arc, char* argv[] ){
                                         if (luachon==100) explain(sukien,false); else explain(sukien,true);
                                         SDL_Delay(5000);
                                         turn++;
-                                        if (ketThuc!=0) khungNen = 5;
+                                        if (ketThuc!=0) game::inKetthuc(ketThuc);
                                     }
                                     else if (event.button.x>836 && event.button.x<986 && event.button.y>36 && event.button.y<68) khungNen = 6;
                                     else if (event.button.x>836 && event.button.x<986 && event.button.y>78 && event.button.y<110) khungNen = 3;
@@ -154,11 +174,12 @@ int main(int arc, char* argv[] ){
                             if (event.button.x>443 && event.button.x<583 && event.button.y>197 && event.button.y<277) {
                                 memset(stt,false,30);
                                 turn = 0;
+                                Money = 32;
+                                Favor = 32;
+                                Oxygen = 64;
+                                Trans = 0;
+                                Influ = 15;
                                 khungNen = 1;
-                                Money=Favor=50;
-                                Oxygen=100;
-                                Influ=20;
-                                Trans=0;
                             }   
                             else if (event.button.x>443 && event.button.x<583 && event.button.y>284 && event.button.y<364) {
                                 if (turn >= 10) khungNen=2;
@@ -191,8 +212,7 @@ int main(int arc, char* argv[] ){
                 }
                 break;}
             case 5:
-                {game::inKetthuc(ketThuc);
-                while (SDL_PollEvent(&event)!=0) {
+                {while (SDL_PollEvent(&event)!=0) {
                     switch (event.type) {
                         case SDL_MOUSEBUTTONDOWN:
                             if (event.button.x>423 && event.button.x<603 && event.button.y>428 && event.button.y<528) khungNen = 3;

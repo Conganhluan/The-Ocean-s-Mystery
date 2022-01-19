@@ -9,6 +9,9 @@ Sukien::Sukien(int a){
     temp = 'b'+b+".png";
     traloiB = IMG_Load(temp.c_str());
     std::string c;
+    if (chuoi[a]==1) c="vua.png";
+    else if (chuoi[a]==2) c="nam.png";
+    else if (chuoi[a]==3) c="nu.png";
     nhanvat = IMG_Load(c.c_str());
     posCauhoi = {35,129,654,264};
     posTraloiA = {92,418,234,124};
