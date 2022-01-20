@@ -51,7 +51,7 @@ int main(int arc, char* argv[] ){
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
     nhacNen = Mix_LoadMUS("nhacNen.mp3");
     Mix_VolumeMusic(20);
-    //Mix_PlayMusic(nhacNen,-1);
+    Mix_PlayMusic(nhacNen,-1);
     game::napAttributes();
     memset(stt,false,30);
     memset(collection,false,4);
@@ -66,7 +66,7 @@ int main(int arc, char* argv[] ){
             case 1: {
                 if (turn==0 && !Checkpoint) {
                     game::inLoigioithieu();
-                    SDL_Delay(5000);
+                    SDL_Delay(8000);
                     Checkpoint = true;
                 };
                 game::showNen(1);
@@ -80,7 +80,7 @@ int main(int arc, char* argv[] ){
                         while (SDL_PollEvent(&event)!=0) {
                             if (event.type==SDL_KEYDOWN && event.key.keysym.sym==SDLK_SPACE) {
                                 if (turn == 4) {
-                                    if (Favor>=45 && Influ>=45 && Oxygen>=25 && Money>=25 && Trans>=25) reNhanh=2;
+                                    if (Favor>=32 && Influ>=32 && Oxygen>=32 && Money>=32 && Trans>=32) reNhanh=2;
                                     else reNhanh=1;
                                     khungNen = 2;
                                 }
@@ -110,6 +110,7 @@ int main(int arc, char* argv[] ){
                                         stt[sukien.laySTT()]=true;
                                     }
                                     thaydoi=true;
+                                    game::bienDoi();
                                 }
                                 else if (event.button.x>398 && event.button.x<632 && event.button.y>418 && event.button.y<542) {
                                     sukien.thaydoi(200);
@@ -121,6 +122,7 @@ int main(int arc, char* argv[] ){
                                         stt[sukien.laySTT()]=true;
                                     }
                                     thaydoi=true;
+                                    game::bienDoi();
                                 }
                                 if (event.button.x>836 && event.button.x<986 && event.button.y>36 && event.button.y<68) khungNen = 6;
                                 else if (event.button.x>836 && event.button.x<986 && event.button.y>78 && event.button.y<110) khungNen = 3;
@@ -141,9 +143,9 @@ int main(int arc, char* argv[] ){
                 game::showAttributes();
                 khoaNen = true;
                 if (turn == 5 || turn == 9 || turn == 13) {
-                    if (turn == 5) collection[0]=true;
-                    else if (turn == 9) collection[1]=true;
-                    else if (turn == 13) collection[2]=collection[3]=true;
+                    if (turn == 5 && reNhanh == 2) collection[0]=true;
+                    else if (turn == 9 && reNhanh == 2) collection[1]=true;
+                    else if (turn == 13 && reNhanh == 2) collection[2]=collection[3]=true;
                     game::inSukien(reNhanh,turn);
                     SDL_RenderPresent(renderer);
                     while (khoaNen) {
@@ -180,6 +182,7 @@ int main(int arc, char* argv[] ){
                                             stt[sukien.laySTT()]=true;
                                         }
                                         thaydoi=true;
+                                        game::bienDoi();
                                     }
                                     else if (event.button.x>398 && event.button.x<632 && event.button.y>418 && event.button.y<542) {
                                         sukien.thaydoi(200);
@@ -191,6 +194,7 @@ int main(int arc, char* argv[] ){
                                             stt[sukien.laySTT()]=true;
                                         }
                                         thaydoi=true;
+                                        game::bienDoi();
                                     }
                                     if (event.button.x>836 && event.button.x<986 && event.button.y>36 && event.button.y<68) khungNen = 6;
                                     else if (event.button.x>836 && event.button.x<986 && event.button.y>78 && event.button.y<110) khungNen = 3;

@@ -54,7 +54,7 @@ void game::thaydoithuoctinh(char a, short b) {
 };
 
 void game::bienDoi(){
-    thaydoithuoctinh('O',-16);
+    thaydoithuoctinh('O',-8);
     thaydoithuoctinh('T',+8);
 };
 
@@ -92,7 +92,7 @@ void game::inKetthuc(short a) {
     texture = IMG_LoadTexture(renderer,temp.c_str());
     SDL_RenderCopy(renderer,texture,NULL,NULL);
     SDL_RenderPresent(renderer);
-    SDL_Delay(3000);
+    SDL_Delay(5000);
     khungNen=5;
 }
 
@@ -121,9 +121,10 @@ void game::inCollection() {
 }
 
 void game::inSukien(short a, short b){
+    SDL_RenderClear(renderer);
     std::string c = "sukien"+std::to_string((int)a) +std::to_string((int)b)+".png";
     texture = IMG_LoadTexture(renderer,c.c_str());
-    SDL_Rect pos = {35,129,654,264};
+    SDL_Rect pos = {35,129,1024,576};
     SDL_RenderCopy(renderer,texture,NULL,&pos);
 }
 
@@ -139,6 +140,7 @@ void game::setupAttribute(){
     Favor = 32;
     Oxygen = 64;
     Trans = 0;
-    Influ = 15;
+    Influ = 16;
     turn = 0;
+    ketThuc = 0;
 }
