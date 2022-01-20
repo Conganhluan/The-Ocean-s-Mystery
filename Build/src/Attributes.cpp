@@ -11,23 +11,23 @@ void game::napAttributes(){
 
 void game::showAttributes(){
     SDL_Rect temp = {0,64-Favor,64,Favor};
-    SDL_Rect temp2 = {40,105-Favor,64,Favor};
-    texture = SDL_CreateTextureFromSurface(renderer,att1);
-    SDL_RenderCopy(renderer,texture,&temp,&temp2);
-
-    texture = SDL_CreateTextureFromSurface(renderer,att2);
-    temp = {0,64-Influ,64,Influ};
-    temp2 = {164,105-Influ,64,Influ};
-    SDL_RenderCopy(renderer,texture,&temp,&temp2);
-
+    SDL_Rect temp2 = {305,104-Favor,64,Favor};
     texture = SDL_CreateTextureFromSurface(renderer,att3);
-    temp = {0,64-Money,64,Money};
-    temp2 = {305,104-Money,64,Money};
     SDL_RenderCopy(renderer,texture,&temp,&temp2);
 
     texture = SDL_CreateTextureFromSurface(renderer,att4);
+    temp = {0,64-Influ,64,Influ};
+    temp2 = {431,105-Influ,64,Influ};
+    SDL_RenderCopy(renderer,texture,&temp,&temp2);
+
+    texture = SDL_CreateTextureFromSurface(renderer,att1);
+    temp = {0,64-Money,64,Money};
+    temp2 = {40,105-Money,64,Money};
+    SDL_RenderCopy(renderer,texture,&temp,&temp2);
+
+    texture = SDL_CreateTextureFromSurface(renderer,att2);
     temp = {0,64-Oxygen,64,Oxygen};
-    temp2 = {431,105-Oxygen,64,Oxygen};
+    temp2 = {164,104-Oxygen,64,Oxygen};
     SDL_RenderCopy(renderer,texture,&temp,&temp2);
 
     texture = SDL_CreateTextureFromSurface(renderer,att5);

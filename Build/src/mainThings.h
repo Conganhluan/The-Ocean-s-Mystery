@@ -28,9 +28,8 @@ extern bool isRunning;
 extern short khungNen;
 extern short turn;
 extern bool stt[30];
-extern short nenHientai;
 extern bool collection[4];
-extern bool Save;
+extern bool Checkpoint;
 extern short reNhanh;
 extern short chuoi[20];
 
@@ -44,11 +43,11 @@ namespace game {
     void showAttributes();
     void nhapfileCache();
     void xuatfileCache();
-    void inCredit();
     void inKetthuc(short a);
     void inCollection();
     void inSukien(short a, short b);
     void inLoigioithieu();
+    void setupAttribute();
 }
 
 #endif

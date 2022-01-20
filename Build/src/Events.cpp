@@ -1,18 +1,13 @@
 #include"Events.h"
 
-Sukien::Sukien(int a){
+Sukien::Sukien(short a){
     std::string b = std::to_string(a);
-    std::string temp = 'c'+b+".png";
-    cauhoi = IMG_Load(temp.c_str());
-    temp = 'a'+b+".png";
-    traloiA = IMG_Load(temp.c_str());
-    temp = 'b'+b+".png";
-    traloiB = IMG_Load(temp.c_str());
-    std::string c;
-    if (chuoi[a]==1) c="vua.png";
-    else if (chuoi[a]==2) c="nam.png";
-    else if (chuoi[a]==3) c="nu.png";
-    nhanvat = IMG_Load(c.c_str());
+    cauhoi = 'c'+b+".png";
+    traloiA = 'a'+b+".png";
+    traloiB = 'b'+b+".png";
+    if (chuoi[a]==1) nhanvat="vua.png";
+    else if (chuoi[a]==2) nhanvat="nam.png";
+    else if (chuoi[a]==3) nhanvat="nu.png";
     posCauhoi = {35,129,654,264};
     posTraloiA = {92,418,234,124};
     posTraloiB = {398,418,234,124};
@@ -20,28 +15,33 @@ Sukien::Sukien(int a){
     sttSukien = a;
 };
 
-Sukien::~Sukien(){
-    SDL_FreeSurface(cauhoi);
-    SDL_FreeSurface(traloiA);
-    SDL_FreeSurface(traloiB);
-    SDL_FreeSurface(nhanvat);
+Sukien::Sukien(){
+    nhanvat=traloiA=cauhoi=traloiB="";
     posCauhoi = {0,0,0,0};
     posTraloiA = {0,0,0,0};
     posTraloiB = {0,0,0,0};
     posNhanvat = {0,0,0,0};
-    sttSukien = 0;
+    sttSukien=-1;
+}
+
+Sukien::~Sukien(){
+    nhanvat=traloiA=cauhoi=traloiB="";
+    posCauhoi = {0,0,0,0};
+    posTraloiA = {0,0,0,0};
+    posTraloiB = {0,0,0,0};
+    posNhanvat = {0,0,0,0};
+    sttSukien=-1;
 };
 
 void show(Sukien a) {
-    texture=SDL_CreateTextureFromSurface(renderer,a.cauhoi);
+    texture=IMG_LoadTexture(renderer,a.cauhoi.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&a.posCauhoi);
-    texture=SDL_CreateTextureFromSurface(renderer,a.traloiA);
+    texture=IMG_LoadTexture(renderer,a.traloiA.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&a.posTraloiA);
-    texture=SDL_CreateTextureFromSurface(renderer,a.traloiB);
+    texture=IMG_LoadTexture(renderer,a.traloiB.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&a.posTraloiB);
-    texture=SDL_CreateTextureFromSurface(renderer,a.nhanvat);
+    texture=IMG_LoadTexture(renderer,a.nhanvat.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&a.posNhanvat);
-    SDL_RenderPresent(renderer);
 };
 
 void explain(Sukien a, bool b) {
@@ -54,19 +54,40 @@ void explain(Sukien a, bool b) {
     texture=IMG_LoadTexture(renderer,c.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&a.posCauhoi);
     SDL_RenderPresent(renderer);
+    SDL_Delay(5000);
 }
 
 void Sukien::thaydoi(short a) {
-    std::string b = std::to_string(this->sttSukien)+".txt";
+    std::string b = std::to_string(sttSukien)+".txt";
     std::ifstream input(b.c_str());
+    std::string luachon;
     short temp1; char temp2;
-    do {input>>temp1;} while (temp1!=a);
-    do {
+    do {input>>luachon;} while (luachon!=std::to_string(a));
+    while (true) {
         if (input.eof()) break;
         input>>temp1;
         if (temp1==200) break;
         input>>temp2;
         game::thaydoithuoctinh(temp2, temp1);
-    } while (true);
+    };
     input.close();
+}
+
+void Sukien::getDulieu(short a) {
+    std::string b = std::to_string(a);
+    cauhoi = 'c'+b+".png";
+    traloiA = 'a'+b+".png";
+    traloiB= 'b'+b+".png";
+    if (chuoi[a]==1) nhanvat="vua.png";
+    else if (chuoi[a]==2) nhanvat="nam.png";
+    else if (chuoi[a]==3) nhanvat="nu.png";
+    posCauhoi = {35,129,654,264};
+    posTraloiA = {92,418,234,124};
+    posTraloiB = {398,418,234,124};
+    posNhanvat = {720,129,269,413};
+    sttSukien = a;
+}
+
+short Sukien::laySTT(){
+    return sttSukien;
 }
