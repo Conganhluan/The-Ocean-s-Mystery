@@ -56,9 +56,15 @@ void game::updateAttributes(char attribute, short number) {
 }
 
 //Update the attributes regularly after each turn
-void game::updateStatus() {
-    Oxygen-=8;
-    Trans+=8;
+void game::updateStatus(short option) {
+    switch (option) {
+        case 0: 
+            Oxygen-=8;
+            Trans+=8;
+            break;
+        case 1:
+            break;
+    }
     return;
 }
 
@@ -165,7 +171,7 @@ void game::showBg(short bgNumber) {
 //Get stories to the renderer
 void game::showStory(short branch, short turn) {
     SDL_RenderClear(renderer);
-    std::string temp = "resource/sukien"+std::to_string(branch)+std::to_string(turn)+".png";
+    std::string temp = "resource/stories/story"+std::to_string(branch)+std::to_string(turn)+".png";
     texture = IMG_LoadTexture(renderer,temp.c_str());
     SDL_RenderCopy(renderer,texture,NULL,NULL);
     return;
@@ -183,6 +189,15 @@ void game::setUp() {
     Oxygen = 64;
     Influ = 16;
     Trans = 0;
+    return;
+}
+
+//Get endings to the renderer
+void game::showEnding(short number) {
+    SDL_RenderClear(renderer);
+    std::string temp = "resource/stories/end"+std::to_string(number)+".png";
+    texture = IMG_LoadTexture(renderer,temp.c_str());
+    SDL_RenderCopy(renderer);
     return;
 }
 
@@ -207,7 +222,7 @@ void showEvent(gameEvent a) {
 //Get the explain for the event to the renderer
 void explainEvent(gameEvent a, bool right) {
     game::showAttributes();
-    std::string temp = "resource/d"+std::to_string(a.getNumber());
+    std::string temp = "resource/events/d"+std::to_string(a.getNumber());
     (right)?temp+='b':temp+='a';
     temp+=".png";
     SDL_Rect temp1 = {35,129,654,264};
@@ -215,3 +230,4 @@ void explainEvent(gameEvent a, bool right) {
     SDL_RenderCopy(renderer,texture,NULL,&temp1);
     return;
 }
+

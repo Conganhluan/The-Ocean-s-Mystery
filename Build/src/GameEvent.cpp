@@ -13,11 +13,11 @@ gameEvent::~gameEvent() {
 //Create an event with the new number
 void gameEvent::setNumber(short a) {
     std::string temp = std::to_string(a);
-    situation = "resource/c"+temp+".png";
-    answerA = "resource/a"+temp+".png";
-    answerB = "resource/b"+temp+".png";
-    explainA = "resource/d"+temp+"a.png";
-    explainB = "resource/d"+temp+"b.png";
+    situation = "resource/events/c"+temp+".png";
+    answerA = "resource/events/a"+temp+".png";
+    answerB = "resource/events/b"+temp+".png";
+    explainA = "resource/events/d"+temp+"a.png";
+    explainB = "resource/events/d"+temp+"b.png";
     character = "resource/";
     switch (characterList[a]) {
         case 1:
@@ -39,7 +39,7 @@ short gameEvent::getNumber() {
 
 //Change the attribute status according to player's option
 void gameEvent::changeAttributes(bool right) {
-    std::string temp = "resource/"+std::to_string(number)+".txt";
+    std::string temp = "resource/events/"+std::to_string(number)+".txt";
     std::ifstream input(temp.c_str());
     std::string option, choice;
     short temp1;

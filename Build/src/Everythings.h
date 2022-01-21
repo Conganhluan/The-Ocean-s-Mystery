@@ -21,6 +21,8 @@ extern SDL_Event event;
 //Game-needed variables
 extern bool isRunning;
 extern bool isLocking;
+extern const int WIDTH;
+extern const int HEIGHT; 
 
 //Self-game variables
 extern short bgNumber;
@@ -38,10 +40,10 @@ extern short Oxygen;
 extern short Influ;
 extern short Trans;
 
-//Function for game
+//Functions for game
 namespace game {
     void updateAttributes(char attribute, short number);
-    void updateStatus();
+    void updateStatus(short option);
     short getRandom();
     void showBg(short bgNumber);
     void showAttributes();
@@ -50,6 +52,15 @@ namespace game {
     void showCollection();
     void showStory(short branch, short turn);
     void setUp();
+    void showEnding(short number);
+}
+
+namespace gameCase {
+    void welcomeCase();
+    void mainCase();
+    void creditCase();
+    void collectionCase();
+    void storyCase();
 }
 
 //class gameEvent

@@ -10,9 +10,11 @@ SDL_Event event;
 //Game-needed variables
 bool isRunning = true;
 bool isLocking = false;
+int const WIDTH = 1024;
+int const HEIGHT = 576;
 
 //Self-game variables
-short bgNumber = 1;
+short bgNumber = 0;
 short endNumber = 0;
 short turn = 0;
 short characterList[30] = {};
