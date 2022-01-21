@@ -14,7 +14,6 @@ int main() {
     Mix_VolumeMusic(20);
     Mix_PlayMusic(music,-1);
     inCache();
-    gameEvent game_event;
 
 
     //Main loop

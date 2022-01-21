@@ -27,10 +27,12 @@ Besides and most important is to find inserts to complete the Collection which r
 - 6: Influence>=64.
 - 7: Influende<=0.
 - 8: Intransformation>=64.
-- 9: Complete branch 1.
-- 10: Complete branch 2.
-- 11: Complete branch 3.
+- 9: Intransformation<=0.
+- 10: Complete branch 1.
+- 11: Complete branch 2.
 - 12: Complete branch 3.
+- 13: Complete branch 4.
+- 14: Uncomplete mission.
 ## charaterList:
 each member is the character number for events.
 ## branchNumber:

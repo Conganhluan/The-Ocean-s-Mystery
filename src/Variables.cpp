@@ -21,10 +21,11 @@ short characterList[30] = {};
 bool collection[4] = {0,0,0,0};
 short branchNumber = 0;
 bool eventCheck[30] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+gameEvent game_event;
 
 //Attributes
 short Money = 32;
 short Favor = 32;
 short Oxygen = 64;
-short Influ = 16;
-short Trans = 0;
+short Influ = 32;
+short Trans = 32;

@@ -13,7 +13,7 @@ void gameCase::welcomeCase() {
                     bgNumber = 6;
                 }
                 else if (event.button.x>443 && event.button.x<583 && event.button.y>284 && event.button.y<364 && bgNumber==1) {
-                    if () bgNumber = 3;
+                    if (turn>=10) bgNumber = 3;
                     else bgNumber = 2;
                     do {game_event.setNumber(getRandom());} while (eventCheck[game_event.getNumber()]);
                     eventCheck[game_event.getNumber()] = true;
@@ -54,11 +54,12 @@ void gameCase::mainCase() {
                         game_event.changeAttributes(right);
                         explainEvent(game_event,right);
                         turn++;
-                        if (endNumber!=0 || turn) bgNumber = 6;
+                        if (endNumber!=0 || turn%5==0) bgNumber = 6;
                         else {
                             do {game_event.setNumber(getRandom());} while (eventCheck[game_event.getNumber()]);
                             eventCheck[game_event.getNumber()] = true;
-                            updateStatus(branchNumber);
+                            if (bgNumber==2) updateStatus(branchNumber);
+                            else updateStatus(0);
                         }
                     }
                     break;
@@ -78,7 +79,7 @@ void gameCase::creditCase() {
     isLocking = true;
     while (isLocking) if (SDL_PollEvent(&event)!=0) {
         if (event.type==SDL_MOUSEBUTTONDOWN && event.button.x>47 && event.button.x<197 && event.button.y>57 && event.button.y<89) bgNumber = 1;
-        else if (event.type==SDL_QUIT) isRuning = false;
+        else if (event.type==SDL_QUIT) isRunning = false;
         if (!isRunning || bgNumber!=4) isLocking = false;
     }
     return;
@@ -90,7 +91,7 @@ void gameCase::collectionCase() {
     isLocking = true;
     while (isLocking) if (SDL_PollEvent(&event)!=0) {
         if (event.type==SDL_MOUSEBUTTONDOWN && event.button.x>47 && event.button.x<197 && event.button.y>37 && event.button.y<69) bgNumber = 1;
-        else if (event.type==SDL_QUIT) isRuning = false;
+        else if (event.type==SDL_QUIT) isRunning = false;
         if (bgNumber!=5 || !isRunning) isLocking = false;
     }
     return;
@@ -101,6 +102,7 @@ void gameCase::storyCase() {
         showEnding(endNumber);
         SDL_RenderPresent(renderer);
         press();
+        if (endNumber>=10 && endNumber<=13) collection[endNumber-10] = true;
         showBg(bgNumber);
         isLocking = true;
         while (isLocking) if (SDL_PollEvent(&event)!=0) {
@@ -119,12 +121,23 @@ void gameCase::storyCase() {
         bgNumber = 2;
     }
     else {
-        showStory(branchNumber,turn);
-        SDL_RenderPresent(renderer);
-        press();
-        updateStatus(branchNumber);
-        if () bgNumber = 3;
-        else bgNumber = 2;
+        if (turn!=15) {
+            showStory(branchNumber,turn);
+            SDL_RenderPresent(renderer);
+            press();
+            if (turn==5) {
+                updateBranch();
+                bgNumber = 2;
+            }
+            else if (turn==10) {
+                if (updateBranch()) bgNumber = 3;
+                else endNumber = 14;
+            }
+        }
+        else {
+            updateBranch();
+            endNumber = branchNumber+9;
+        }
     }
     return;
 }

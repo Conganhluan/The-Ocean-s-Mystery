@@ -50,20 +50,35 @@ void game::updateAttributes(char attribute, short number) {
                 Trans=64;
                 endNumber=8;
             }
-            else if (Trans<0) Trans=0;
+            else if (Trans<0) {
+                Trans=0;
+                endNumber=9;
+            }
     }
     return;
 }
 
 //Update the attributes regularly after each turn
 void game::updateStatus(short option) {
+    Oxygen-=8;
     switch (option) {
-        case 0: 
-            Oxygen-=8;
+        case 1:
+            Money-=8;
+            Favor+=8;
+            break;
+        case 2:
+            Favor-=8;
             Trans+=8;
             break;
-        case 1:
+        case 3:
+            Influ-=8;
+            Money+=8;
             break;
+        case 4:
+            Trans-=8;
+            Influ+=8;
+            break;
+
     }
     return;
 }
@@ -187,8 +202,8 @@ void game::setUp() {
     Money = 32;
     Favor = 32;
     Oxygen = 64;
-    Influ = 16;
-    Trans = 0;
+    Influ = 32;
+    Trans = 32;
     return;
 }
 
@@ -197,7 +212,7 @@ void game::showEnding(short number) {
     SDL_RenderClear(renderer);
     std::string temp = "resource/stories/end"+std::to_string(number)+".png";
     texture = IMG_LoadTexture(renderer,temp.c_str());
-    SDL_RenderCopy(renderer);
+    SDL_RenderCopy(renderer,texture,NULL,NULL);
     return;
 }
 
@@ -248,4 +263,49 @@ void game::showIntroduction(short number) {
     texture = IMG_LoadTexture(renderer,temp.c_str());
     SDL_RenderCopy(renderer,texture,NULL,NULL);
     return;
+}
+
+bool game::updateBranch() {
+    short maxx = 0, maxxx;
+    if (maxx<Money) {
+        maxxx = 1;
+        maxx = Money;
+    }
+    if (maxx<Favor) {
+        maxxx = 2;
+        maxx = Favor;
+    }
+    if (maxx<Influ) {
+        maxxx = 3;
+        maxx = Influ;
+    }
+    if (maxx<Trans) {
+        maxxx = 4;
+        maxx = Trans;
+    }
+    switch (turn) {
+        case 5:
+            branchNumber = maxxx;
+            return true;
+        case 10: 
+            switch (branchNumber) {
+                case 1:
+                    if (maxxx==1 || maxxx==2) return false;
+                    break;
+                case 2:
+                    if (maxxx==2 || maxxx==4) return false;
+                    break;
+                case 3:
+                    if (maxxx==3 || maxxx==1) return false;
+                    break;
+                case 4:
+                    if (maxxx==4 || maxxx==3) return false;
+                    break;
+            }
+            break;
+        case 15:
+            branchNumber = maxxx;
+            return true;
+    }
+    return true;
 }
