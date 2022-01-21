@@ -65,7 +65,8 @@ is the branchNumber, the update will change depending on the branchNumber.
 - The 8th row sequencely are Money, Favor, Oxygen, Influence, Transformation.
 - The 9th row sequencely are branchNumber and turn.
 ## Attribute_change files: 
-100 *number* *uppercase_first_letter_of_attribute* *number* *uppercase_first_letter_of_attribute* ... [^1]  
+100 *number* *uppercase_first_letter_of_attribute* *number* *uppercase_first_letter_of_attribute* ...  
 > This line is for the answerA.  
-200 *number* *uppercase_first_letter_of_attribute* *number* *uppercase_first_letter_of_attribute* ... [^2]  
+  
+200 *number* *uppercase_first_letter_of_attribute* *number* *uppercase_first_letter_of_attribute* ...  
 > This line is for the answerB.
