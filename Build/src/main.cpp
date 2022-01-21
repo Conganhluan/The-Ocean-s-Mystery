@@ -21,14 +21,10 @@ int main() {
     while (isRunning) {
         switch (bgNumber) {
             case 0:
-                gameCase::welcomeCase();
-                break;
             case 1: 
                 gameCase::welcomeCase();
                 break;
             case 2:
-                gameCase::mainCase();
-                break;
             case 3:
                 gameCase::mainCase();
                 break;

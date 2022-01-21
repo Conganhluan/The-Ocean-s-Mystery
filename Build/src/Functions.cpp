@@ -171,7 +171,7 @@ void game::showBg(short bgNumber) {
 //Get stories to the renderer
 void game::showStory(short branch, short turn) {
     SDL_RenderClear(renderer);
-    std::string temp = "resource/stories/story"+std::to_string(branch)+std::to_string(turn)+".png";
+    std::string temp = "resource/stories/story"+std::to_string(branch)+"_"+std::to_string(turn)+".png";
     texture = IMG_LoadTexture(renderer,temp.c_str());
     SDL_RenderCopy(renderer,texture,NULL,NULL);
     return;
