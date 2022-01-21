@@ -10,7 +10,7 @@ Besides and most important is to find inserts to complete the Collection which r
 - 3: The main background 2 to play the game (darker background).
 - 4: The credit background.
 - 5: The collection background.
-- 6: The background to show the stories and endings.
+- 6: The background to show the introductions, stories and endings.
 ## gameCase:
 - welcomeCase(): bgNumber 0 and 1.    
 - mainCase(): bgNumber 2 and 3.
@@ -27,13 +27,18 @@ Besides and most important is to find inserts to complete the Collection which r
 - 6: Influence>=64.
 - 7: Influende<=0.
 - 8: Intransformation>=64.
+- 9: Complete branch 1.
+- 10: Complete branch 2.
+- 11: Complete branch 3.
+- 12: Complete branch 3.
 ## charaterList:
 each member is the character number for events.
 ## branchNumber:
 - 0: Not a branch yet.
-- 1: 
-## options in updateStatus() function: 
-is the branchNumber, the update will change depending on the branchNumber.
+- 1: Depend on Money.
+- 2: Depend on Favor.
+- 3: Depend on Influence.
+- 4: Depend on Transformation.
 
 
 # File names:
@@ -47,6 +52,7 @@ is the branchNumber, the update will change depending on the branchNumber.
 ## Stories' files (in resource/stories/):
 - Stories' files: story*branch*_*turn*.png;
 - Endings' files: end*number*.png;   
+- Introducions' files: intro*number*.png;
 ## Sounds' files (in resource/sounds/):
 - Background music: bgmusic.mp3;
 - Interactive sound: *name*.wav;
@@ -63,7 +69,7 @@ is the branchNumber, the update will change depending on the branchNumber.
 - The 6 first rows (each row has 5 number) is eventCheck[].
 - The 7th row is collectionList[].
 - The 8th row sequencely are Money, Favor, Oxygen, Influence, Transformation.
-- The 9th row sequencely are branchNumber and turn.
+- The 9th row sequencely are branchNumber, turn and isSaved.
 ## Attribute_change files: 
 100 *number* *uppercase_first_letter_of_attribute* *number* *uppercase_first_letter_of_attribute* ...  
 > This line is for the answerA.  

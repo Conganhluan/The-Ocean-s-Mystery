@@ -11,7 +11,7 @@
 #include <fstream>
 #include <iostream>
 
-//Environment variables
+//Environment variables 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* texture;
@@ -53,6 +53,8 @@ namespace game {
     void showStory(short branch, short turn);
     void setUp();
     void showEnding(short number);
+    void press();
+    void showIntroduction(short number);
 }
 
 namespace gameCase {
@@ -80,7 +82,9 @@ class gameEvent {
         short getNumber();
         void changeAttributes(bool right);
         friend void showEvent(gameEvent a);
-        friend void explainEvent(gameEvent a, short b);
+        friend void explainEvent(gameEvent a, bool right);
 };
+
+extern gameEvent game_event;
 
 #endif

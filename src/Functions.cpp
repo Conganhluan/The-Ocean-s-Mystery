@@ -231,3 +231,21 @@ void explainEvent(gameEvent a, bool right) {
     return;
 }
 
+//Press left button of the mouse to continue
+void game::press() {
+    isLocking = true;
+    while (isLocking) if (SDL_PollEvent(&event)!=0) {
+        if (event.type==SDL_MOUSEBUTTONDOWN && event.button.button==SDL_BUTTON_LEFT)
+        isLocking = false;
+    }
+    return;
+}
+
+//Get the introductions to the renderer
+void game::showIntroduction(short number) {
+    SDL_RenderClear(renderer);
+    std::string temp = "resource/stories/intro"+std::to_string(number)+".png";
+    texture = IMG_LoadTexture(renderer,temp.c_str());
+    SDL_RenderCopy(renderer,texture,NULL,NULL);
+    return;
+}

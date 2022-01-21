@@ -43,6 +43,7 @@ int main() {
 
 
     //Destroy everything
+    if (endNumber!=0) setUp();
     outCache();
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);

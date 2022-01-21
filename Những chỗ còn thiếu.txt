@@ -1,0 +1,5 @@
+- welcomCase: nút continue chưa cập nhật số turn sẽ chuyển cảnh
+- characterList: chưa có thông tin
+- mainCase: chỗ điều kiện để vào khung story
+- storyCase: thiếu điều kiện để vào khung 2 hay 3, giống welcomeCase
+- hàm updateStatus
