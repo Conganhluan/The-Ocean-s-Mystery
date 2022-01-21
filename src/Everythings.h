@@ -56,6 +56,7 @@ namespace game {
     void press();
     void showIntroduction(short number);
     bool updateBranch();
+    void startOver();
 }
 
 namespace gameCase {

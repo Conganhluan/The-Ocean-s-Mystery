@@ -177,7 +177,7 @@ void game::showCollection() {
 //Get the background to the renderer
 void game::showBg(short bgNumber) {
     SDL_RenderClear(renderer);
-    std::string temp = "resouce/bg"+std::to_string(bgNumber)+".png";
+    std::string temp = "resource/bg"+std::to_string(bgNumber)+".png";
     texture = IMG_LoadTexture(renderer,temp.c_str());
     SDL_RenderCopy(renderer,texture,NULL,NULL);
     return;
@@ -308,4 +308,11 @@ bool game::updateBranch() {
             return true;
     }
     return true;
+}
+
+void game::startOver() {
+    SDL_RenderClear(renderer);
+    texture = IMG_LoadTexture(renderer,"resource/stories/startover.png");
+    SDL_RenderCopy(renderer,texture,NULL,NULL);
+    return;
 }

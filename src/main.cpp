@@ -8,7 +8,7 @@ int main() {
     SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow("The Ocean's Mystery",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,WIDTH,HEIGHT,0);
     renderer = SDL_CreateRenderer(window,-1,0);
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
+    SDL_SetRenderDrawColor(renderer, 138, 188, 222, 0);
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
     music = Mix_LoadMUS("resouce/sounds/bgmusic.mp3");
     Mix_VolumeMusic(20);

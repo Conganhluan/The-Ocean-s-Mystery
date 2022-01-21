@@ -26,8 +26,8 @@ Besides and most important is to find inserts to complete the Collection which r
 - 5: Oxygen<=0.
 - 6: Influence>=64.
 - 7: Influende<=0.
-- 8: Intransformation>=64.
-- 9: Intransformation<=0.
+- 8: Transformation>=64.
+- 9: Transformation<=0.
 - 10: Complete branch 1.
 - 11: Complete branch 2.
 - 12: Complete branch 3.
@@ -55,6 +55,7 @@ each member is the character number for events.
 - Stories' files: story*branch*_*turn*.png;
 - Endings' files: end*number*.png;   
 - Introducions' files: intro*number*.png;
+- StartOver's file: startover.png;
 ## Sounds' files (in resource/sounds/):
 - Background music: bgmusic.mp3;
 - Interactive sound: *name*.wav;

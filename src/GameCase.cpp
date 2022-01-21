@@ -98,7 +98,19 @@ void gameCase::collectionCase() {
 }
 
 void gameCase::storyCase() {
-    if (endNumber!=0) {
+    bool check = true;
+    for (int i=0;i<4;i++) if (!collection[i]) {
+        check = false;
+        break;
+    }
+    if (check) {
+        startOver();
+        SDL_RenderPresent(renderer);
+        press();
+        memset(collection,false,4);
+        bgNumber = 0;
+    }
+    else if (endNumber!=0) {
         showEnding(endNumber);
         SDL_RenderPresent(renderer);
         press();
