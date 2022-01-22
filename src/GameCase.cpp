@@ -132,20 +132,22 @@ void gameCase::storyCase() {
         bgNumber = 2;
     }
     else {
-        if (turn!=15) {
+        if (turn==5) {
+            updateBranch();
             showStory(branchNumber,turn);
             SDL_RenderPresent(renderer);
             press();
-            if (turn==5) {
-                updateBranch();
-                bgNumber = 2;
-            }
-            else if (turn==10) {
-                if (updateBranch()) bgNumber = 3;
-                else endNumber = 14;
-            }
+            bgNumber = 2;
         }
-        else {
+        else if (turn==10) {
+            if (updateBranch()) {
+                showStory(branchNumber,turn);
+                SDL_RenderPresent(renderer);
+                press();
+                bgNumber = 3;
+            else endNumber = 14;
+        }
+        else if (turn==15) {
             updateBranch();
             endNumber = branchNumber+9;
         }
