@@ -107,7 +107,6 @@ void gameCase::storyCase() {
         startOver();
         SDL_RenderPresent(renderer);
         press();
-        memset(collection,false,4);
         bgNumber = 0;
     }
     else if (endNumber!=0) {
