@@ -39,8 +39,9 @@ short gameEvent::getNumber() {
 
 //Change the attribute status according to player's option
 void gameEvent::changeAttributes(bool right) {
-    std::string temp = "resource/events/"+std::to_string(number)+".txt";
-    std::ifstream input(temp.c_str());
+    std::ifstream input("resource/events/events.txt");
+    std::string temp = "event"+std::to_string(number), temp3;
+    do {input>>temp3;} while (temp3!=temp);
     std::string option, choice;
     short temp1;
     char temp2;

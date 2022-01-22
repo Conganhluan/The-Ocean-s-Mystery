@@ -50,7 +50,7 @@ each member is the character number for events.
 - AnswerB: b*number*.png;
 - ExplainA: d*number*a.png;
 - ExplainB: d*number*b.png;
-- Attribute_change: *number*.txt;
+- Attribute_change: events.txt;
 ## Stories' files (in resource/stories/):
 - Stories' files: story*branch*_*turn*.png;
 - Endings' files: end*number*.png;   
@@ -74,6 +74,7 @@ each member is the character number for events.
 - The 8th row sequencely are Money, Favor, Oxygen, Influence, Transformation.
 - The 9th row sequencely are branchNumber, turn and isSaved.
 ## Attribute_change files: 
+event*number*  
 100 *number* *uppercase_first_letter_of_attribute* *number* *uppercase_first_letter_of_attribute* ...  
 > This line is for the answerA.  
   
