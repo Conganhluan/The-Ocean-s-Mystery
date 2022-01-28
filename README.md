@@ -50,7 +50,7 @@ each member is the character number for events.
 - AnswerB: b*number*.png;
 - ExplainA: d*number*a.png;
 - ExplainB: d*number*b.png;
-- Attribute_change: events.txt;
+- Attribute_change: event*number*.txt;
 ## Stories' files (in resource/stories/):
 - Stories' files: story*branch*_*turn*.png;
 - Endings' files: end*number*.png;   
