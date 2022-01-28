@@ -1,4 +1,7 @@
-#include "Everythings.h"
+#include "GameCase.h"
+#include "GameEvent.h"
+#include "Functions.h"
+#include "Variables.h"
 #undef main
 using namespace game;
 
@@ -10,11 +13,10 @@ int main() {
     renderer = SDL_CreateRenderer(window,-1,0);
     SDL_SetRenderDrawColor(renderer, 138, 188, 222, 0);
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
-    music = Mix_LoadMUS("resouce/sounds/bgmusic.mp3");
+    music = Mix_LoadMUS("resource/sounds/bgmusic.mp3");
     Mix_VolumeMusic(20);
     Mix_PlayMusic(music,-1);
     inCache();
-
 
     //Main loop
     while (isRunning) {
@@ -38,8 +40,6 @@ int main() {
                 break;
         }
     }
-
-
 
     //Destroy everything
     if (endNumber!=0) setUp();

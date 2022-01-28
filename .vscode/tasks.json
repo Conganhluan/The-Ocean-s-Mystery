@@ -7,10 +7,6 @@
             "args": [
                 "-g",
                 "src\\main.cpp",
-                "src\\Variables.cpp",
-                "src\\Functions.cpp",
-                "src\\GameEvent.cpp",
-                "src\\GameCase.cpp",
                 "-o",
                 "build\\game.exe",
                 "-ID:/Personal_files/C++/The_Ocean_Mystery_game/lib/SDL/SDL2-2.0.20/include",
