@@ -15,15 +15,22 @@ void gameCase::welcomeCase() {
                 if (event.button.x>443 && event.button.x<583 && event.button.y>197 && event.button.y<277) {
                     setUp();
                     bgNumber = 6;
+                    soundClick("right");
                 }
                 else if (event.button.x>443 && event.button.x<583 && event.button.y>284 && event.button.y<364 && bgNumber==1) {
                     if (turn>=10) bgNumber = 3;
                     else bgNumber = 2;
-                    do {game_event.setNumber(getRandom());} while (eventCheck[game_event.getNumber()]);
-                    eventCheck[game_event.getNumber()] = true;
+                    soundClick("right");
                 }
-                else if (event.button.x>443 && event.button.x<583 && event.button.y>370 && event.button.y<450) bgNumber = 4;
-                else if (event.button.x>443 && event.button.x<583 && event.button.y>457 && event.button.y<537) bgNumber = 5;
+                else if (event.button.x>443 && event.button.x<583 && event.button.y>370 && event.button.y<450) {
+                    bgNumber = 4;
+                    soundClick("right");
+                }
+                else if (event.button.x>443 && event.button.x<583 && event.button.y>457 && event.button.y<537) {
+                    bgNumber = 5;
+                    soundClick("right");
+                }
+                else soundClick("wrong");
                 break;
             case SDL_QUIT:
                 isRunning = false;
@@ -36,6 +43,8 @@ void gameCase::welcomeCase() {
 
 //For the Gameplay screen
 void gameCase::mainCase() {
+    do {game_event.setNumber(getRandom());} while (eventCheck[game_event.getNumber()]);
+    eventCheck[game_event.getNumber()] = true;
     showEvent(game_event);
     SDL_RenderPresent(renderer);
     isLocking = true;
@@ -47,27 +56,35 @@ void gameCase::mainCase() {
                     if (event.button.x>92 && event.button.x<326 && event.button.y>418 && event.button.y<542) {
                         pressOption = true;
                         right = false;
+                        soundClick("right");
                     }
                     else if (event.button.x>398 && event.button.x<632 && event.button.y>418 && event.button.y<542) {
                         pressOption = true;
                         right = true;
+                        soundClick("right");
                     }
-                    else if (event.button.x>836 && event.button.x<986 && event.button.y>36 && event.button.y<68) bgNumber = 5;
-                    else if (event.button.x>836 && event.button.x<986 && event.button.y>78 && event.button.y<110) bgNumber = 1;
-                    else if (event.button.x>736 && event.button.x<800 && event.button.y>37 && event.button.y<101) bgNumber = 4;
+                    else if (event.button.x>836 && event.button.x<986 && event.button.y>36 && event.button.y<68) {
+                        bgNumber = 5;
+                        soundClick("right");
+                    }
+                    else if (event.button.x>836 && event.button.x<986 && event.button.y>78 && event.button.y<110) {
+                        bgNumber = 1;
+                        soundClick("right");
+                    }
+                    else if (event.button.x>736 && event.button.x<800 && event.button.y>37 && event.button.y<101) {
+                        bgNumber = 4;
+                        soundClick("right");
+                    }
+                    else soundClick("wrong");
                     if (pressOption) {
                         game_event.changeAttributes(right);
+                        if (bgNumber==2) updateStatus(branchNumber);
+                        else updateStatus(0);
                         explainEvent(game_event,right);
                         SDL_RenderPresent(renderer);
                         press();
                         turn++;
                         if (endNumber!=0 || turn%5==0) bgNumber = 6;
-                        else {
-                            do {game_event.setNumber(getRandom());} while (eventCheck[game_event.getNumber()]);
-                            eventCheck[game_event.getNumber()] = true;
-                            if (bgNumber==2) updateStatus(branchNumber);
-                            else updateStatus(0);
-                        }
                     }
                     break;
                 case SDL_QUIT:
@@ -86,7 +103,13 @@ void gameCase::creditCase() {
     SDL_RenderPresent(renderer);
     isLocking = true;
     while (isLocking) if (SDL_PollEvent(&event)!=0) {
-        if (event.type==SDL_MOUSEBUTTONDOWN && event.button.x>47 && event.button.x<197 && event.button.y>57 && event.button.y<89) bgNumber = 1;
+        if (event.type==SDL_MOUSEBUTTONDOWN) {
+            if (event.button.x>47 && event.button.x<197 && event.button.y>57 && event.button.y<89) {
+                bgNumber = 1;
+                soundClick("right");
+            }
+            else soundClick("wrong");
+        }
         else if (event.type==SDL_QUIT) isRunning = false;
         if (!isRunning || bgNumber!=4) isLocking = false;
     }
@@ -99,7 +122,13 @@ void gameCase::collectionCase() {
     SDL_RenderPresent(renderer);
     isLocking = true;
     while (isLocking) if (SDL_PollEvent(&event)!=0) {
-        if (event.type==SDL_MOUSEBUTTONDOWN && event.button.x>47 && event.button.x<197 && event.button.y>37 && event.button.y<69) bgNumber = 1;
+        if (event.type==SDL_MOUSEBUTTONDOWN) {
+            if (event.button.x>47 && event.button.x<197 && event.button.y>37 && event.button.y<69) {
+                bgNumber = 1;
+                soundClick("right");
+            }
+            else soundClick("wrong");
+        }
         else if (event.type==SDL_QUIT) isRunning = false;
         if (bgNumber!=5 || !isRunning) isLocking = false;
     }
@@ -117,8 +146,27 @@ void gameCase::storyCase() {
     if (check) {
         startOver();
         SDL_RenderPresent(renderer);
-        press();
-        bgNumber = 0;
+        isLocking = true;
+        while (isLocking) if (SDL_PollEvent(&event)!=0) {
+            switch (event.type) {
+                case SDL_MOUSEBUTTONDOWN:
+                    if (event.button.x>=840 && event.button.x<=990 && event.button.y>=30 && event.button.y<=62) {
+                        memset(collection,0,4);
+                        bgNumber = 2;
+                        soundClick("right");
+                    }
+                    else if (event.button.x>=30 && event.button.x<=180 && event.button.y>=30 && event.button.y<=62) {
+                        bgNumber = 5;
+                        soundClick("right");
+                    }
+                    else soundClick("wrong");
+                    break;
+                case SDL_QUIT:
+                    isRunning = false;
+                    break;
+            }
+            if (bgNumber!=6 || !isRunning) isLocking = false;
+        }
     }
     //End-game screen
     else if (endNumber!=0) {
@@ -130,7 +178,13 @@ void gameCase::storyCase() {
         SDL_RenderPresent(renderer);
         isLocking = true;
         while (isLocking) if (SDL_PollEvent(&event)!=0) {
-            if (event.type==SDL_MOUSEBUTTONDOWN && event.button.x>423 && event.button.x<603 && event.button.y>428 && event.button.y<528) bgNumber = 0;
+            if (event.type==SDL_MOUSEBUTTONDOWN) {
+                if (event.button.x>423 && event.button.x<603 && event.button.y>428 && event.button.y<528) {
+                    bgNumber = 0;
+                    soundClick("right");
+                }
+                else soundClick("wrong");
+            }
             else if (event.type==SDL_QUIT) isRunning = false;
             if (bgNumber!=6 || !isRunning) isLocking = false;
         }
@@ -140,12 +194,12 @@ void gameCase::storyCase() {
         showIntroduction(0);
         SDL_RenderPresent(renderer);
         press();
-        showIntroduction(1);
-        SDL_RenderPresent(renderer);
-        press();
-        bgNumber = 2;
-        do {game_event.setNumber(getRandom());} while (eventCheck[game_event.getNumber()]);
-        eventCheck[game_event.getNumber()] = true;
+        if (isRunning) {
+            showIntroduction(1);
+            SDL_RenderPresent(renderer);
+            press();
+            bgNumber = 2;
+        }
     }
     //Story telling screen
     else {

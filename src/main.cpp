@@ -14,7 +14,7 @@ int main() {
     SDL_SetRenderDrawColor(renderer, 138, 188, 222, 0);
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024);
     music = Mix_LoadMUS("resource/sounds/bgmusic.mp3");
-    Mix_VolumeMusic(20);
+    Mix_VolumeMusic(60);
     Mix_PlayMusic(music,-1);
     inCache();
 

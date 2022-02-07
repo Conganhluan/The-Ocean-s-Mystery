@@ -16,6 +16,7 @@ extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* texture;
 extern Mix_Music* music;
+extern Mix_Chunk* chunk;
 extern SDL_Event event;
 
 //Game-needed variables
@@ -57,6 +58,7 @@ namespace game {
     void showIntroduction(short number);
     bool updateBranch();
     void startOver();
+    void soundClick(std::string name);
 }
 
 namespace gameCase {

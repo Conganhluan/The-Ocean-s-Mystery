@@ -63,25 +63,24 @@ void game::updateAttributes(char attribute, short number) {
 
 //Update the attributes regularly after each turn
 void game::updateStatus(short option) {
-    Oxygen-=12;
+    updateAttributes('O',-12);
     switch (option) {
         case 1:
-            Money-=8;
-            Favor+=8;
+            updateAttributes('M',-8);
+            updateAttributes('F',8);
             break;
         case 2:
-            Favor-=8;
-            Trans+=8;
+            updateAttributes('F',-8);
+            updateAttributes('T',8);
             break;
         case 3:
-            Influ-=8;
-            Money+=8;
+            updateAttributes('I',-8);
+            updateAttributes('M',8);
             break;
         case 4:
-            Trans-=8;
-            Influ+=8;
+            updateAttributes('T',-8);
+            updateAttributes('I',8);
             break;
-
     }
     return;
 }
@@ -256,8 +255,14 @@ void explainEvent(gameEvent a, bool right) {
 void game::press() {
     isLocking = true;
     while (isLocking) if (SDL_PollEvent(&event)!=0) {
-        if (event.type==SDL_MOUSEBUTTONDOWN && event.button.button==SDL_BUTTON_LEFT)
-        isLocking = false;
+        if (event.type==SDL_MOUSEBUTTONDOWN && event.button.button==SDL_BUTTON_LEFT) {
+            isLocking = false;
+            soundClick("right");
+        }
+        else if (event.type==SDL_QUIT) {
+            isLocking = false;
+            isRunning = false;
+        }
     }
     return;
 }
@@ -322,6 +327,14 @@ void game::startOver() {
     SDL_RenderClear(renderer);
     texture = IMG_LoadTexture(renderer,"resource/stories/startover.png");
     SDL_RenderCopy(renderer,texture,NULL,NULL);
+    return;
+}
+
+//Play interactive sound when clicking
+void game::soundClick(std::string name) {
+    std::string temp = "resource/sounds/"+name+".wav";
+    chunk = Mix_LoadWAV(temp.c_str());
+    Mix_PlayChannel(-1,chunk,0);
     return;
 }
 

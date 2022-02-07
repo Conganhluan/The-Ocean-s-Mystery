@@ -8,6 +8,7 @@ SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Texture* texture = NULL;
 Mix_Music* music = NULL;
+Mix_Chunk* chunk = NULL;
 SDL_Event event;
 
 //Game-needed variables
