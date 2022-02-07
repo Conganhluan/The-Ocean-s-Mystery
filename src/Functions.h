@@ -226,13 +226,13 @@ void showEvent(gameEvent a) {
     SDL_Rect temp2 = {92,418,234,124};
     SDL_Rect temp3 = {398,418,234,124};
     SDL_Rect temp4 = {720,129,269,413};
-    texture=IMG_LoadTexture(renderer,a.situation.c_str());
+    texture = IMG_LoadTexture(renderer,a.situation.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&temp1);
-    texture=IMG_LoadTexture(renderer,a.answerA.c_str());
+    texture = IMG_LoadTexture(renderer,a.answerA.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&temp2);
-    texture=IMG_LoadTexture(renderer,a.answerB.c_str());
+    texture = IMG_LoadTexture(renderer,a.answerB.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&temp3);
-    texture=IMG_LoadTexture(renderer,a.character.c_str());
+    texture = IMG_LoadTexture(renderer,a.character.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&temp4);
     return;
 }
@@ -244,8 +244,11 @@ void explainEvent(gameEvent a, bool right) {
     (right)?temp+='b':temp+='a';
     temp+=".png";
     SDL_Rect temp1 = {35,129,654,264};
+    SDL_Rect temp2 = {720,129,269,413};
     texture = IMG_LoadTexture(renderer,temp.c_str());
     SDL_RenderCopy(renderer,texture,NULL,&temp1);
+    texture = IMG_LoadTexture(renderer,a.character.c_str());
+    SDL_RenderCopy(renderer,texture,NULL,&temp2);
     return;
 }
 

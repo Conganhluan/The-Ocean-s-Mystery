@@ -45,25 +45,25 @@ each member is the character number for events.
 
 # File names:
 ## Events' files (in resource/events/):
-- Situation: c*number*.png;
-- AnswerA: a*number*.png;
-- AnswerB: b*number*.png;
-- ExplainA: d*number*a.png;
-- ExplainB: d*number*b.png;
+- Situation: c*number*.png; (654x264*px*)
+- AnswerA: a*number*.png; (234x124*px*)
+- AnswerB: b*number*.png; (234x124*px*)
+- ExplainA: d*number*a.png; (654x264*px*)
+- ExplainB: d*number*b.png; (654x264*px*)
 - Attribute_change: event*number*.txt;
 ## Stories' files (in resource/stories/):
-- Stories' files: story*branch*_*turn*.png;
-- Endings' files: end*number*.png;   
-- Introducions' files: intro*number*.png;
-- StartOver's file: startover.png;
+- Stories' files: story*branch*_*turn*.png; (1024x576*px*)
+- Endings' files: end*number*.png; (1024x576*px*)
+- Introducions' files: intro*number*.png; (1024x576*px*)
+- StartOver's file: startover.png; (1024x576*px*)
 ## Sounds' files (in resource/sounds/):
 - Background music: bgmusic.mp3;
 - Interactive sound: *name*.wav;
 ## Another files (in resource/):
-- Characters' files: *Character's name*.png;
-- Atrributes' files: *Atrribute's name*.png;
-- Collections' files: collection*number*.png;
-- Backgrounds' files: bg*number*.png;
+- Characters' files: *Character's name*.png; (260x400*px*)
+- Atrributes' files: *Atrribute's name*.png; (64x64*px*)
+- Collections' files: collection*number*.png; (200x200*px*)
+- Backgrounds' files: bg*number*.png; (1024x576*px*)
 - Cache file: Cache.txt;
 
 
@@ -79,4 +79,7 @@ event*number*
 > This line is for the answerA.  
   
 200 *number* *uppercase_first_letter_of_attribute* *number* *uppercase_first_letter_of_attribute* ...  
-> This line is for the answerB.
+> This line is for the answerB.  
+
+# Command to compile in Luan's PC
+"C:\Program Files\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\g++.exe" -g src\main.cpp -o build\game.exe -ID:/Personal_files/C++/The-Ocean-s-Mystery/lib/SDL/SDL2-2.0.20/include -LD:/Personal_files/C++/The-Ocean-s-Mystery/lib/SDL/SDL2-2.0.20/lib/x64 -Wall -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -mwindows

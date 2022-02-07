@@ -58,6 +58,8 @@ void gameCase::mainCase() {
                     if (pressOption) {
                         game_event.changeAttributes(right);
                         explainEvent(game_event,right);
+                        SDL_RenderPresent(renderer);
+                        press();
                         turn++;
                         if (endNumber!=0 || turn%5==0) bgNumber = 6;
                         else {
@@ -106,6 +108,7 @@ void gameCase::collectionCase() {
 
 //For the Introduction, Story, Ending and Goodbye screen 
 void gameCase::storyCase() {
+    //Game-over screen
     bool check = true;
     for (int i=0;i<4;i++) if (!collection[i]) {
         check = false;
@@ -117,12 +120,14 @@ void gameCase::storyCase() {
         press();
         bgNumber = 0;
     }
+    //End-game screen
     else if (endNumber!=0) {
         showEnding(endNumber);
         SDL_RenderPresent(renderer);
         press();
         if (endNumber>=10 && endNumber<=13) collection[endNumber-10] = true;
         showBg(bgNumber);
+        SDL_RenderPresent(renderer);
         isLocking = true;
         while (isLocking) if (SDL_PollEvent(&event)!=0) {
             if (event.type==SDL_MOUSEBUTTONDOWN && event.button.x>423 && event.button.x<603 && event.button.y>428 && event.button.y<528) bgNumber = 0;
@@ -130,6 +135,7 @@ void gameCase::storyCase() {
             if (bgNumber!=6 || !isRunning) isLocking = false;
         }
     }
+    //Introduction screen
     else if (turn==0) {
         showIntroduction(0);
         SDL_RenderPresent(renderer);
@@ -138,7 +144,10 @@ void gameCase::storyCase() {
         SDL_RenderPresent(renderer);
         press();
         bgNumber = 2;
+        do {game_event.setNumber(getRandom());} while (eventCheck[game_event.getNumber()]);
+        eventCheck[game_event.getNumber()] = true;
     }
+    //Story telling screen
     else {
         if (turn==5) {
             updateBranch();
