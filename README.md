@@ -1,5 +1,5 @@
 The game is about the adventure to get out of the Life under the Ocean.
-Besides and most important is to find inserts to complete the Collection which reveals the Truth there.
+Besides, the most important thing is to find inserts to complete the Collection which reveals the Truth there.
 
 
 # Variables:
